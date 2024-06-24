@@ -21,8 +21,18 @@ while True:
     escolha_usuario = int(input(f"{menu}Escolha uma opção: "))
 
     if escolha_usuario == 1:
-        print("\n======= Depositar =======\n")
-        deposito = float(input("Digite o valor do depósito: "))
+        
+        while True:
+
+            print("\n======= Depositar =======\n")
+            deposito = float(input("Digite o valor do depósito: "))
+
+            if deposito <= 0:
+                print("Não é possível depositar esse valor!")
+
+            else:
+                break
+        
         print(".")
         sleep(1)
         print("..")
@@ -35,8 +45,18 @@ while True:
         extrato += f'\nDepósito no valor de {deposito}'
 
     elif escolha_usuario == 2:
-        print("\n======= Saque =======\n")
-        saque = float(input("Digite o valor do saque: "))
+
+        while True:
+            
+            print("\n======= Saque =======\n")
+            saque = float(input("Digite o valor do saque: "))
+
+            if saque <= 0:
+                print("Valor inválido!")
+
+            else:
+                break
+            
         print(".")
         sleep(1)
         print("..")
@@ -44,18 +64,22 @@ while True:
         print("...")
         sleep(1)
 
-        if numero_saques <= LIMITE_SAQUE and saque <= limite_por_saque:
+        if saldo - saque < 0:
+            print("Não será possível sacar o dinheiro por falta de saldo.")
+
+        elif numero_saques < LIMITE_SAQUE and saque <= limite_por_saque:
             saldo -= saque
             print("Saque confirmado")
             numero_saques += 1
-        
-        if saldo - saque < 0:
-            print("Não será possível sacar o dinheiro por falta de saldo.")
-        
-        sleep(1)
-        extrato += f'\nSaque no valor de {saque}'
+            extrato += f'\nSaque no valor de {saque}'
 
-        
+        else:
+            if numero_saques >= LIMITE_SAQUE:
+                print("Saque não realizado! Ultrapassou o limite de saques diários.")
+            elif saque > limite_por_saque:
+                print("Tentativa de sacar valor maior que o limite diário! Se necessário entre em contato com a agência.")
+         
+        sleep(1)
 
     elif escolha_usuario == 3:
         relatorio_extrato = f"""\n======= Extrato ======= {extrato}
