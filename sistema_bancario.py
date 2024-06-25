@@ -42,7 +42,7 @@ while True:
         saldo += deposito
         print("Depósico confirmado")
         sleep(1)
-        extrato += f'\nDepósito no valor de {deposito}'
+        extrato += f'\nDepósito no valor de R$ {deposito}'
 
     elif escolha_usuario == 2:
 
@@ -71,17 +71,19 @@ while True:
             saldo -= saque
             print("Saque confirmado")
             numero_saques += 1
-            extrato += f'\nSaque no valor de {saque}'
+            extrato += f'\nSaque no valor de R$ {saque}'
 
         else:
             if numero_saques >= LIMITE_SAQUE:
                 print("Saque não realizado! Ultrapassou o limite de saques diários.")
             elif saque > limite_por_saque:
-                print("Tentativa de sacar valor maior que o limite diário! Se necessário entre em contato com a agência.")
+                print("Tentativa de sacar valor maior que o seu limite diário de R$ 500.00!")
+                print("Se necessário entre em contato com a agência.")
          
         sleep(1)
 
     elif escolha_usuario == 3:
+
         relatorio_extrato = f"""\n======= Extrato ======= {extrato}
         \nSaldo: {saldo}
         """
@@ -91,6 +93,6 @@ while True:
         break
 
     else:
-        print("Opção errada. Escolha uma das opções")
+        print("\nOpção errada. Escolha uma das opções")
 
 print("\n======= Obrigado por ser nosso cliente, tenha um bom dia! =======\n")
